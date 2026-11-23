@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -5,137 +6,293 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#7c3aed">
   <title>جشن‌ها و مسابقات - هپیلا</title>
+
   <link rel="stylesheet" href="events.css">
-<link href="https://fonts.googleapis.com/css2?family=Estedad:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Estedad:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
+
 <body class="events-body">
-  <div class="ambient ambient-one" aria-hidden="true"></div>
-  <div class="ambient ambient-two" aria-hidden="true"></div>
-  <div class="sparkle sparkle-one" aria-hidden="true">✦</div>
-  <div class="sparkle sparkle-two" aria-hidden="true">✧</div>
-  <div class="sparkle sparkle-three" aria-hidden="true">✦</div>
-  <div class="sparkle sparkle-four" aria-hidden="true">✧</div>
+
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <div class="sparkle sparkle-one">✦</div>
+  <div class="sparkle sparkle-two">✧</div>
+  <div class="sparkle sparkle-three">✦</div>
+  <div class="sparkle sparkle-four">✧</div>
 
   <main class="events-page">
+
     <header class="event-banner">
-      <div class="event-icon" aria-hidden="true">🎉</div>
+      <div class="event-icon">🎉</div>
       <p class="small-title">دنیای شادی‌های هپیلا</p>
       <h1>جشن‌ها و مسابقات</h1>
       <p class="banner-subtitle">لحظه‌های رنگی، خاطره‌های ماندگار ✨</p>
-      <div class="rainbow-line" aria-hidden="true"></div>
+      <div class="rainbow-line"></div>
     </header>
 
-    <section id="event-content" aria-live="polite" aria-atomic="true">
-      <div class="empty-event">
-        <div class="empty-icon" aria-hidden="true">🎈</div>
-        <h2>در حال حاضر، جشن یا رویداد فعالی برگزار نمی‌شود.</h2>
-        <p>اما لحظه‌های شاد و اتفاق‌های هیجان‌انگیز در راه‌اند! منتظر خبرهای تازه هپیلا باشید. 💜</p>
-      </div>
+    <section id="event-content" aria-live="polite">
+
+      <div class="events-grid" id="events-grid"></div>
+
     </section>
 
-    <a href="index.html" class="back-button"><span aria-hidden="true">⌂</span> بازگشت به هپیلا</a>
+    <a href="index.html" class="back-button">
+      <span>⌂</span>
+      بازگشت به هپیلا
+    </a>
+
   </main>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      /*
-       * تنظیم رویداد:
-       * برای نمایش جشن یا مسابقه، active را true کنید و startAt را با تاریخ و ساعت آینده
-       * به قالب YYYY-MM-DDTHH:mm:ss وارد کنید. ساعت بر اساس منطقه زمانی دستگاه بازدیدکننده است.
-       * برای نمایش حالت بدون رویداد، active را false بگذارید.
-       */
-      const eventInfo = {
-        active:false,
-        title: "جشن تولد هپیلا",
-        type: "جشن",
-        description: "با ما یک روز پر از شادی، بازی و جایزه‌های هیجان‌انگیز بساز!",
-        startAt: "2026-11-14T17:00:00"
-      };
+<script>
 
-      const contentContainer = document.getElementById("event-content");
-      if (!contentContainer) return;
+document.addEventListener("DOMContentLoaded", () => {
 
-      const faDate = new Intl.DateTimeFormat("fa-IR-u-ca-persian", {
-        year: "numeric", month: "long", day: "numeric"
-      });
-      const faDay = new Intl.DateTimeFormat("fa-IR", { weekday: "long" });
-      const faTime = new Intl.DateTimeFormat("fa-IR", { hour: "2-digit", minute: "2-digit" });
-      const faNumber = value => new Intl.NumberFormat("fa-IR", { minimumIntegerDigits: 2, useGrouping: false }).format(value);
+  const eventsGrid = document.getElementById("events-grid");
 
-      const startAt = new Date(eventInfo.startAt);
-      // نمایش رویداد فقط به active وابسته است؛ تاریخ گذشته باعث پنهان شدن کارت نمی‌شود.
-      const hasUpcomingEvent = eventInfo.active === true &&
-        eventInfo.title.trim() !== "" &&
-        !Number.isNaN(startAt.getTime());
+  // تاریخ و ساعت رویدادها
+  const events = [
 
-      if (!hasUpcomingEvent) {
-        contentContainer.innerHTML = `
-          <div class="empty-event">
-            <div class="empty-icon" aria-hidden="true">🎈</div>
-            <span class="status-pill status-idle">در حال حاضر، رویدادی برگزار نمی‌شود</span>
-            <h2>در حال حاضر، جشن یا رویداد فعالی برگزار نمی‌شود.</h2>
-            <p>اما لحظه‌های شاد و اتفاق‌های هیجان‌انگیز در راه‌اند! منتظر خبرهای تازه هپیلا باشید. 💜</p>
-            <div class="empty-confetti" aria-hidden="true">✦ ✧ 🎊 ✧ ✦</div>
-          </div>`;
+    {
+      number: "۱",
+      title: "کارگاه زبان مادر و کودک",
+      type: "کارگاه آموزشی",
+      description:
+        "در شهر مشاغل همبازی، کارگاه‌های مادر و کودک انگلیسی برگزار می‌کنیم. کودکان در کنار مادران خود، با شعر، بازی و کاردستی زبان انگلیسی را یاد می‌گیرند.",
+      schedule: "هر پنجشنبه",
+      time: "۱۱:۰۰ تا ۱۳:۰۰",
+      weekly: true,
+      day: 4,
+      hour: 11,
+      minute: 0
+    },
+
+    {
+      number: "۲",
+      title: "ایونت شمع‌سازی",
+      type: "ایونت ویژه",
+      description:
+        "در ایونت شمع‌سازی همبازی، تجربه‌ای خلاقانه و سرگرم‌کننده در انتظار شماست.",
+      schedule: "سه‌شنبه ۳ آذر ۱۴۰۵",
+      time: "۱۸:۰۰ تا ۱۹:۰۰",
+      weekly: false,
+      startAt: "2026-11-24T18:00:00",
+      gift: "۲۰ دقیقه بازی رایگان در شهر مشاغل همبازی",
+      note: "فقط با پرداخت ورودی یک ساعت شهر مشاغل همبازی"
+    }
+
+  ];
+
+  const faDate = new Intl.DateTimeFormat("fa-IR-u-ca-persian", {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  });
+
+  const faDay = new Intl.DateTimeFormat("fa-IR", {
+    weekday: "long"
+  });
+
+  const faNumber = value =>
+    new Intl.NumberFormat("fa-IR", {
+      minimumIntegerDigits: 2,
+      useGrouping: false
+    }).format(value);
+
+  // محاسبه پنجشنبه بعدی برای کارگاه زبان
+  function getNextThursday() {
+
+    const now = new Date();
+    const target = new Date(now);
+
+    let difference = (4 - now.getDay() + 7) % 7;
+
+    target.setDate(now.getDate() + difference);
+    target.setHours(11, 0, 0, 0);
+
+    if (target <= now) {
+      target.setDate(target.getDate() + 7);
+    }
+
+    return target;
+  }
+
+  function getStartDate(event) {
+
+    if (event.weekly) {
+      return getNextThursday();
+    }
+
+    return new Date(event.startAt);
+  }
+
+  function renderEvents() {
+
+    eventsGrid.innerHTML = events.map((event, index) => {
+
+      const startAt = getStartDate(event);
+
+      const extraInfo = event.gift ? `
+        <div class="event-extra">
+          <strong>🎁 هدیه ویژه ایونت</strong>
+          <p>${event.gift}</p>
+          <small>${event.note}</small>
+        </div>
+      ` : "";
+
+      return `
+
+        <article class="active-event-card">
+
+          <div class="card-glow"></div>
+
+          <div class="event-number">
+            ${event.number}
+          </div>
+
+          <span class="status-pill">
+            <span class="status-dot"></span>
+            ${event.type} فعال
+          </span>
+
+          <h2>${event.title}</h2>
+
+          <p class="event-desc">
+            ${event.description}
+          </p>
+
+          <div class="event-details-grid">
+
+            <div class="detail-item">
+              <span>📅 روز و تاریخ</span>
+              <strong>${event.schedule}</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>🗓 روز هفته</span>
+              <strong class="event-day"></strong>
+            </div>
+
+            <div class="detail-item">
+              <span>⏰ ساعت</span>
+              <strong>${event.time}</strong>
+            </div>
+
+          </div>
+
+          ${extraInfo}
+
+          <div class="countdown-section">
+
+            <p class="countdown-title">
+              ⏳ زمان باقی‌مانده تا شروع ایونت
+            </p>
+
+            <div class="countdown">
+
+              <div class="time-unit">
+                <strong class="cd-days">۰۰</strong>
+                <span>روز</span>
+              </div>
+
+              <div class="time-separator">:</div>
+
+              <div class="time-unit">
+                <strong class="cd-hours">۰۰</strong>
+                <span>ساعت</span>
+              </div>
+
+              <div class="time-separator">:</div>
+
+              <div class="time-unit">
+                <strong class="cd-minutes">۰۰</strong>
+                <span>دقیقه</span>
+              </div>
+
+              <div class="time-separator">:</div>
+
+              <div class="time-unit">
+                <strong class="cd-seconds">۰۰</strong>
+                <span>ثانیه</span>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="event-footer-note">
+            برای تجربه‌ای سرشار از هیجان آماده‌اید؟ 💖
+          </div>
+
+        </article>
+
+      `;
+
+    }).join("");
+
+    const cards = eventsGrid.querySelectorAll(".active-event-card");
+
+    cards.forEach((card, index) => {
+
+      const event = events[index];
+      const startAt = getStartDate(event);
+
+      card.querySelector(".event-day").textContent =
+        faDay.format(startAt);
+
+    });
+
+    updateCountdowns();
+
+  }
+
+  function updateCountdowns() {
+
+    const cards = eventsGrid.querySelectorAll(".active-event-card");
+
+    cards.forEach((card, index) => {
+
+      const event = events[index];
+      const startAt = getStartDate(event);
+
+      const remaining = startAt.getTime() - Date.now();
+
+      const countdown = card.querySelector(".countdown-section");
+
+      if (remaining <= 0) {
+
+        countdown.innerHTML = `
+          <p class="countdown-title">
+            🎊 ${event.title} آغاز شده است!
+          </p>
+        `;
+
         return;
       }
 
-      contentContainer.innerHTML = `
-        <article class="active-event-card">
-          <div class="card-glow" aria-hidden="true"></div>
-          <span class="status-pill"><span class="status-dot"></span> ${eventInfo.type} پیشِ رو</span>
-          <h2>${escapeHtml(eventInfo.title)}</h2>
-          <p class="event-desc">${escapeHtml(eventInfo.description)}</p>
-          <div class="event-details-grid">
-            <div class="detail-item"><span>📅 تاریخ</span><strong id="event-date"></strong></div>
-            <div class="detail-item"><span>🗓 روز</span><strong id="event-day"></strong></div>
-            <div class="detail-item"><span>⏰ ساعت</span><strong id="event-time"></strong></div>
-          </div>
-          <div class="countdown-section">
-            <p class="countdown-title"><span aria-hidden="true">⏳</span> زمان باقی‌مانده تا شروع ${eventInfo.type}</p>
-            <div class="countdown" role="timer" aria-live="off">
-              <div class="time-unit"><strong id="cd-days">۰۰</strong><span>روز</span></div>
-              <div class="time-separator">:</div>
-              <div class="time-unit"><strong id="cd-hours">۰۰</strong><span>ساعت</span></div>
-              <div class="time-separator">:</div>
-              <div class="time-unit"><strong id="cd-minutes">۰۰</strong><span>دقیقه</span></div>
-              <div class="time-separator">:</div>
-              <div class="time-unit"><strong id="cd-seconds">۰۰</strong><span>ثانیه</span></div>
-            </div>
-          </div>
-          <div class="event-footer-note">برای تجربه‌ای سرشار از هیجان آماده‌اید؟ 💖</div>
-        </article>`;
+      const totalSeconds = Math.floor(remaining / 1000);
 
-      document.getElementById("event-date").textContent = faDate.format(startAt);
-      document.getElementById("event-day").textContent = faDay.format(startAt);
-      document.getElementById("event-time").textContent = faTime.format(startAt);
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
 
-      let countdownInterval;
-      function updateCountdown() {
-        const remaining = startAt.getTime() - Date.now();
-        if (remaining <= 0) {
-          clearInterval(countdownInterval);
-          const countdownSection = contentContainer.querySelector(".countdown-section");
-          if (countdownSection) {
-            countdownSection.innerHTML = `<p class="countdown-title">🎊 ${escapeHtml(eventInfo.title)} آغاز شده است!</p><p class="countdown-title">اکنون زمان لذت بردن از جشن است. 💜</p>`;
-          }
-          return;
-        }
-        const totalSeconds = Math.floor(remaining / 1000);
-        document.getElementById("cd-days").textContent = faNumber(Math.floor(totalSeconds / 86400));
-        document.getElementById("cd-hours").textContent = faNumber(Math.floor((totalSeconds % 86400) / 3600));
-        document.getElementById("cd-minutes").textContent = faNumber(Math.floor((totalSeconds % 3600) / 60));
-        document.getElementById("cd-seconds").textContent = faNumber(totalSeconds % 60);
-      }
-      updateCountdown();
-      countdownInterval = setInterval(updateCountdown, 1000);
+      card.querySelector(".cd-days").textContent = faNumber(days);
+      card.querySelector(".cd-hours").textContent = faNumber(hours);
+      card.querySelector(".cd-minutes").textContent = faNumber(minutes);
+      card.querySelector(".cd-seconds").textContent = faNumber(seconds);
 
-      function escapeHtml(value) {
-        return String(value).replace(/[&<>"']/g, char => ({
-          "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
-        })[char]);
-      }
     });
-  </script>
+
+  }
+
+  renderEvents();
+
+  setInterval(updateCountdowns, 1000);
+
+});
+
+</script>
+
 </body>
 </html>
