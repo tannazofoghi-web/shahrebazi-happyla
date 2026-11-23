@@ -1,69 +1,298 @@
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#7d32d8">
-  <title>ایونت‌ها | همبازی</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="events2.css">
+  <meta name="theme-color" content="#7c3aed">
+  <title>جشن‌ها و مسابقات - هپیلا</title>
+
+  <link rel="stylesheet" href="events.css">
   <link href="https://fonts.googleapis.com/css2?family=Estedad:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
-<body class="events-page">
-<main class="events-scene">
-  <div class="park-deco park-deco-left" aria-hidden="true">🎡</div>
-  <div class="park-deco park-deco-right" aria-hidden="true">🎢</div>
-  <div class="event-page-heading">
-    <span class="event-sparkle" aria-hidden="true">✦ ✨ ✦</span>
-    <h1>ایونت‌ها</h1>
-    <p>همواره جشنی تازه و تجربه‌ای جدید در همبازی!</p>
-  </div>
 
-  <section id="active-events-list" aria-live="polite" aria-label="ایونت‌های در حال برگزاری"></section>
+<body class="events-body">
 
-  <section id="no-event-poster" class="event-poster" aria-live="polite" hidden>
-    <div id="no-event" class="no-event-state">
-      <div class="no-event-art" aria-hidden="true"><span>🎠</span><span>🎈</span><span>🎁</span></div>
-      <span class="no-event-pill">اتفاقی دل‌نشین در راه است!</span>
-      <h2>فعلاً ایونتی در حال برگزاری نیست</h2>
-      <p>ما در حال آماده‌سازی تجربه‌های شاد بعدی هستیم. به‌زودی دوباره به ما سر بزنید! 💜</p>
-      <a href="hambazi.html" class="event-register">آشنایی با همبازی <span>←</span></a>
-    </div>
-  </section>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
 
-  <template id="event-poster-template">
-    <article class="event-poster">
-      <div class="event-active-content">
-        <div class="poster-top-splash" aria-hidden="true"><span>🎈</span><span>⭐</span></div>
-        <div class="event-brand"><span class="brand-kids" aria-hidden="true"></span><strong>HAMBAZI</strong></div>
-        <p class="event-eyebrow">شما هم می‌توانید در این برنامه شرکت کنید</p>
-        <h2 class="event-title">عنوان ایونت</h2>
-        <p class="event-description"></p>
-        <div class="event-illustration" aria-hidden="true"><span>🧒🏻</span><span>🎨</span><span>🧑🏻‍🎨</span></div>
-        <div class="event-facts">
-          <article><span class="fact-icon">📍</span><b>مکان</b><p class="event-location"></p></article>
-          <article><span class="fact-icon">🕒</span><b>زمان</b><p class="event-time"></p></article>
-          <article><span class="fact-icon">🎁</span><b>هزینه</b><p class="event-price"></p></article>
-          <article><span class="fact-icon">📝</span><b> فواید شرکت</b><p class="event-rules"></p></article>
+  <div class="sparkle sparkle-one">✦</div>
+  <div class="sparkle sparkle-two">✧</div>
+  <div class="sparkle sparkle-three">✦</div>
+  <div class="sparkle sparkle-four">✧</div>
+
+  <main class="events-page">
+
+    <header class="event-banner">
+      <div class="event-icon">🎉</div>
+      <p class="small-title">دنیای شادی‌های هپیلا</p>
+      <h1>جشن‌ها و مسابقات</h1>
+      <p class="banner-subtitle">لحظه‌های رنگی، خاطره‌های ماندگار ✨</p>
+      <div class="rainbow-line"></div>
+    </header>
+
+    <section id="event-content" aria-live="polite">
+
+      <div class="events-grid" id="events-grid"></div>
+
+    </section>
+
+    <a href="index.html" class="back-button">
+      <span>⌂</span>
+      بازگشت به هپیلا
+    </a>
+
+  </main>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const eventsGrid = document.getElementById("events-grid");
+
+  // تاریخ و ساعت رویدادها
+  const events = [
+
+    {
+      number: "۱",
+      title: "کارگاه زبان مادر و کودک",
+      type: "کارگاه آموزشی",
+      description:
+        "در شهر مشاغل همبازی، کارگاه‌های مادر و کودک انگلیسی برگزار می‌کنیم. کودکان در کنار مادران خود، با شعر، بازی و کاردستی زبان انگلیسی را یاد می‌گیرند.",
+      schedule: "هر پنجشنبه",
+      time: "۱۱:۰۰ تا ۱۳:۰۰",
+      weekly: true,
+      day: 4,
+      hour: 11,
+      minute: 0
+    },
+
+    {
+      number: "۲",
+      title: "ایونت شمع‌سازی",
+      type: "ایونت ویژه",
+      description:
+        "در ایونت شمع‌سازی همبازی، تجربه‌ای خلاقانه و سرگرم‌کننده در انتظار شماست.",
+      schedule: "سه‌شنبه ۳ آذر ۱۴۰۵",
+      time: "۱۸:۰۰ تا ۱۹:۰۰",
+      weekly: false,
+      startAt: "2026-11-24T18:00:00",
+      gift: "۲۰ دقیقه بازی رایگان در شهر مشاغل همبازی",
+      note: "فقط با پرداخت ورودی یک ساعت شهر مشاغل همبازی"
+    }
+
+  ];
+
+  const faDate = new Intl.DateTimeFormat("fa-IR-u-ca-persian", {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  });
+
+  const faDay = new Intl.DateTimeFormat("fa-IR", {
+    weekday: "long"
+  });
+
+  const faNumber = value =>
+    new Intl.NumberFormat("fa-IR", {
+      minimumIntegerDigits: 2,
+      useGrouping: false
+    }).format(value);
+
+  // محاسبه پنجشنبه بعدی برای کارگاه زبان
+  function getNextThursday() {
+
+    const now = new Date();
+    const target = new Date(now);
+
+    let difference = (4 - now.getDay() + 7) % 7;
+
+    target.setDate(now.getDate() + difference);
+    target.setHours(11, 0, 0, 0);
+
+    if (target <= now) {
+      target.setDate(target.getDate() + 7);
+    }
+
+    return target;
+  }
+
+  function getStartDate(event) {
+
+    if (event.weekly) {
+      return getNextThursday();
+    }
+
+    return new Date(event.startAt);
+  }
+
+  function renderEvents() {
+
+    eventsGrid.innerHTML = events.map((event, index) => {
+
+      const startAt = getStartDate(event);
+
+      const extraInfo = event.gift ? `
+        <div class="event-extra">
+          <strong>🎁 هدیه ویژه ایونت</strong>
+          <p>${event.gift}</p>
+          <small>${event.note}</small>
         </div>
-       
-        <p class="event-contact-note">برای ثبت‌نام و دریافت اطلاعات بیشتر به دایرکت مجموعه پیام دهید  💌
-             <a class="instagram-button" href="https://www.instagram.com/hambazi.jobcity?cplk=ZnlocjFoMWVqb2E3" target="_blank" rel="noopener noreferrer">مشاهده صفحه اینستاگرام <span>↗</span></a>
-        </p>
-      </div>
-    </article>
-  </template>
+      ` : "";
 
-  <section class="coming-events" aria-labelledby="coming-title">
-    <h2 id="coming-title"><span>⭐</span> ایونت‌های دیگر همبازی <span>⭐</span></h2>
-    <div class="coming-grid">
-      <article class="coming-card coming-birthday"><span class="coming-emoji" aria-hidden="true">🎂</span><strong>جشن‌ها و تولدها</strong><small>به‌زودی...</small></article>
-      <article class="coming-card coming-fun"><span class="coming-emoji" aria-hidden="true">🎡</span><strong>بازی و سرگرمی</strong><small>به‌زودی...</small></article>
-      <article class="coming-card coming-art"><span class="coming-emoji" aria-hidden="true">🎨</span><strong>کارگاه‌های خلاقیت</strong><small>به‌زودی...</small></article>
-    </div>
-  </section>
-</main>
-<footer><div class="footer-wave"></div><a href="index.html"><img src="images/lego.png" alt="لوگوی هپیلا"></a><nav class="footer-links"><a href="index.html">صفحه اصلی</a><a href="hambazi.html">همبازی</a><a href="index.html#contact">ارتباط با ما</a></nav><p>© تمامی حقوق برای شهربازی هپیلا محفوظ است.</p></footer>
-<script src="js/script.js"></script>
+      return `
+
+        <article class="active-event-card">
+
+          <div class="card-glow"></div>
+
+          <div class="event-number">
+            ${event.number}
+          </div>
+
+          <span class="status-pill">
+            <span class="status-dot"></span>
+            ${event.type} فعال
+          </span>
+
+          <h2>${event.title}</h2>
+
+          <p class="event-desc">
+            ${event.description}
+          </p>
+
+          <div class="event-details-grid">
+
+            <div class="detail-item">
+              <span>📅 روز و تاریخ</span>
+              <strong>${event.schedule}</strong>
+            </div>
+
+            <div class="detail-item">
+              <span>🗓 روز هفته</span>
+              <strong class="event-day"></strong>
+            </div>
+
+            <div class="detail-item">
+              <span>⏰ ساعت</span>
+              <strong>${event.time}</strong>
+            </div>
+
+          </div>
+
+          ${extraInfo}
+
+          <div class="countdown-section">
+
+            <p class="countdown-title">
+              ⏳ زمان باقی‌مانده تا شروع ایونت
+            </p>
+
+            <div class="countdown">
+
+              <div class="time-unit">
+                <strong class="cd-days">۰۰</strong>
+                <span>روز</span>
+              </div>
+
+              <div class="time-separator">:</div>
+
+              <div class="time-unit">
+                <strong class="cd-hours">۰۰</strong>
+                <span>ساعت</span>
+              </div>
+
+              <div class="time-separator">:</div>
+
+              <div class="time-unit">
+                <strong class="cd-minutes">۰۰</strong>
+                <span>دقیقه</span>
+              </div>
+
+              <div class="time-separator">:</div>
+
+              <div class="time-unit">
+                <strong class="cd-seconds">۰۰</strong>
+                <span>ثانیه</span>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="event-footer-note">
+            برای تجربه‌ای سرشار از هیجان آماده‌اید؟ 💖
+          </div>
+
+        </article>
+
+      `;
+
+    }).join("");
+
+    const cards = eventsGrid.querySelectorAll(".active-event-card");
+
+    cards.forEach((card, index) => {
+
+      const event = events[index];
+      const startAt = getStartDate(event);
+
+      card.querySelector(".event-day").textContent =
+        faDay.format(startAt);
+
+    });
+
+    updateCountdowns();
+
+  }
+
+  function updateCountdowns() {
+
+    const cards = eventsGrid.querySelectorAll(".active-event-card");
+
+    cards.forEach((card, index) => {
+
+      const event = events[index];
+      const startAt = getStartDate(event);
+
+      const remaining = startAt.getTime() - Date.now();
+
+      const countdown = card.querySelector(".countdown-section");
+
+      if (remaining <= 0) {
+
+        countdown.innerHTML = `
+          <p class="countdown-title">
+            🎊 ${event.title} آغاز شده است!
+          </p>
+        `;
+
+        return;
+      }
+
+      const totalSeconds = Math.floor(remaining / 1000);
+
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      card.querySelector(".cd-days").textContent = faNumber(days);
+      card.querySelector(".cd-hours").textContent = faNumber(hours);
+      card.querySelector(".cd-minutes").textContent = faNumber(minutes);
+      card.querySelector(".cd-seconds").textContent = faNumber(seconds);
+
+    });
+
+  }
+
+  renderEvents();
+
+  setInterval(updateCountdowns, 1000);
+
+});
+
+</script>
+
 </body>
 </html>
